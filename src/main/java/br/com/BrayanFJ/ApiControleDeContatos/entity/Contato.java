@@ -9,8 +9,9 @@ public class Contato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Integer tipoContato; // 0 = Telefone, 1 = Celular
+    private TipoDeContato tipoContato;
 
     @Column(nullable = false)
     private String contato;
@@ -23,11 +24,11 @@ public class Contato {
         return id;
     }
 
-    public Integer getTipoContato() {
+    public TipoDeContato getTipoContato() {
         return tipoContato;
     }
 
-    public void setTipoContato(Integer tipoContato) {
+    public void setTipoContato(TipoDeContato tipoContato) {
         this.tipoContato = tipoContato;
     }
 
@@ -47,11 +48,11 @@ public class Contato {
         this.pessoa = pessoa;
     }
 
-    // Construtor Padrão
+
     public Contato() {}
 
-    // Construtor com Parâmetros
-    public Contato(Long id, Integer tipoContato, String contato, Pessoa pessoa) {
+
+    public Contato(Long id, TipoDeContato tipoContato, String contato, Pessoa pessoa) {
         this.id = id;
         this.tipoContato = tipoContato;
         this.contato = contato;

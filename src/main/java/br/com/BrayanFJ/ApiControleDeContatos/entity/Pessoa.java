@@ -28,6 +28,8 @@ public class Pessoa {
         this.uf = uf;
     }
 
+    //getters e setters
+
     public Long getId() {
         return id;
     }
