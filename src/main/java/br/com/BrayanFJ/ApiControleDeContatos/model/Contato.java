@@ -1,4 +1,4 @@
-package br.com.BrayanFJ.ApiControleDeContatos.entity;
+package br.com.BrayanFJ.ApiControleDeContatos.model;
 
 import jakarta.persistence.*;
 
@@ -22,6 +22,10 @@ public class Contato {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public TipoDeContato getTipoContato() {
