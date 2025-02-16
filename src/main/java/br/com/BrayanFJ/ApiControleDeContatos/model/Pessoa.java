@@ -1,4 +1,4 @@
-package br.com.BrayanFJ.ApiControleDeContatos.entity;
+package br.com.BrayanFJ.ApiControleDeContatos.model;
 
 import jakarta.persistence.*;
 
