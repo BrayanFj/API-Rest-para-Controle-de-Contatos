@@ -21,4 +21,11 @@ public class ContatoResource {
         return contatoService.salvarContato(contato);
     }
 
+    // Endpoint para listar todos os contatos (CRUD - gET)
+    @GetMapping
+    public List<Contato> listarContatos() {
+        return contatoService.listarTodosContatos();
+    }
+
+
 }
