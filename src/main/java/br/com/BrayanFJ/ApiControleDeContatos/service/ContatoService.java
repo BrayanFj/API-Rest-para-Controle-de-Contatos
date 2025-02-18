@@ -41,12 +41,15 @@ public class ContatoService {
     }
 
     // Método para excluir um contato existente
-    @Transactional
-    public void deletarContato(Long id) {
-        if (!contatoRepository.existsById(id)) {
-            throw new EntityNotFoundException("Contato com ID " + id + " não encontrado.");
+    public boolean deletarContato(Long id) {
+        Optional<Contato> contato = contatoRepository.findById(id);
+        if (contato.isPresent()) {
+            contatoRepository.delete(contato.get());
+            return true;
         }
-        contatoRepository.deleteById(id);
+        return false;
     }
 
 }
+
+

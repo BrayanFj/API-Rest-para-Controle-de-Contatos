@@ -2,41 +2,55 @@ package br.com.BrayanFJ.ApiControleDeContatos.resource;
 
 import br.com.BrayanFJ.ApiControleDeContatos.model.Contato;
 import br.com.BrayanFJ.ApiControleDeContatos.service.ContatoService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/contatos") // Mapeia a URL para esta classe
+@RequestMapping("/api/contatos") // Mapeia a URL para esta classe
 public class ContatoResource {
 
     @Autowired
     private ContatoService contatoService;
 
-    // Endpoint para criar um novo contato (CRUD - POST)
+    //Endpoints
+
+    @Operation(summary = "Endpoint para criar um novo")
     @PostMapping
-    public Contato criarContato(@RequestBody Contato contato) {
-        return contatoService.salvarContato(contato);
+    public ResponseEntity<Contato> criarContato(@RequestBody Contato contato) {
+        Contato novoContato = contatoService.salvarContato(contato);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoContato);
     }
 
-    // Endpoint para listar todos os contatos (CRUD - gET)
+
+    @Operation(summary = "Endpoint para listar todos os contatos")
     @GetMapping
     public List<Contato> listarContatos() {
         return contatoService.listarTodosContatos();
     }
 
-    // Endpoint para buscar um contato por ID (CRUD - GET / este busca por um id especifico )
+
+    @Operation(summary = "Endpoint para buscar um contato por ID")
     @GetMapping("/pessoa/{idPessoa}")
-    public List<Contato> listarContatosPorPessoa(@PathVariable Long idPessoa) {
-        return contatoService.listarContatosPorPessoa(idPessoa);
+    public ResponseEntity<List<Contato>> listarContatosPorPessoa(@PathVariable Long idPessoa) {
+        List<Contato> contatos = contatoService.listarContatosPorPessoa(idPessoa);
+
+        //valida se a pessoa existe
+        if (contatos == null || contatos.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Collections.emptyList());
+        }
+        return ResponseEntity.ok(contatos);
     }
 
 
-    // Endpoint para atualizar um contato (CRUD - PUT)
+    @Operation(summary = "Endpoint para atualizar um contato")
     @PutMapping("/{id}")
     public ResponseEntity<Contato> atualizarContato(@PathVariable Long id, @RequestBody Contato contato) {
         Contato contatoAtualizado = contatoService.atualizarContato(id, contato);
@@ -47,13 +61,15 @@ public class ContatoResource {
         return ResponseEntity.notFound().build();  // Retorna 404 caso o contato não existir
     }
 
-    // Endpoint para excluir um contato (CRUD - PUT)
+
+    @Operation(summary = "Endpoint para excluir um contato")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
-        contatoService.deletarContato(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                .body("Contato com ID " + id + " removido com sucesso.");
+        if (!contatoService.deletarContato(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Contato com ID " + id + " não encontrado.");
+        }
+        return ResponseEntity.noContent().build();
     }
-
 
 }

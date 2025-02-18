@@ -1,7 +1,7 @@
 package br.com.BrayanFJ.ApiControleDeContatos.service;
 
 import br.com.BrayanFJ.ApiControleDeContatos.model.Pessoa;
-import br.com.BrayanFJ.ApiControleDeContatos.model.PessoaMalaDiretaDTO;
+import br.com.BrayanFJ.ApiControleDeContatos.DTO.PessoaMalaDiretaDTO;
 import br.com.BrayanFJ.ApiControleDeContatos.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ public class PessoaService {
     private PessoaRepository pessoaRepository;
 
     // Método para criar uma pessoa
-    public Pessoa salvarPessoa(Pessoa pessoa) {
+    public Pessoa criarPessoa(Pessoa pessoa) {
         return pessoaRepository.save(pessoa);
     }
 
@@ -30,17 +30,23 @@ public class PessoaService {
         return pessoaRepository.findById(id);
     }
 
-    //método para busca uma pessoa por mala direta
-    public PessoaMalaDiretaDTO obterMalaDiretaPorId(Long id) {
-        Pessoa pessoa = pessoaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Pessoa não encontrada"));
-        return new PessoaMalaDiretaDTO(pessoa);
+    public Optional<PessoaMalaDiretaDTO> buscarIDMaladireta(Long id) {
+        Optional<Pessoa> pessoaOptional = pessoaRepository.findById(id);
+
+        // Se a pessoa for encontrada, cria o DTO para Mala Direta
+        if (pessoaOptional.isPresent()) {
+            Pessoa pessoa = pessoaOptional.get();
+            return Optional.of(new PessoaMalaDiretaDTO(pessoa));
+        } else {
+            return Optional.empty(); // Retorna vazio se não encontrar a pessoa
+        }
     }
 
 
     // Método para excluir uma pessoa
-    public void excluirPessoa(Long id) {
+    public boolean excluirPessoa(Long id) {
         pessoaRepository.deleteById(id);
+        return false;
     }
 
     //Método para atualizar a pessoa

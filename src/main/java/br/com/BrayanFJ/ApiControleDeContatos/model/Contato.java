@@ -1,5 +1,7 @@
 package br.com.BrayanFJ.ApiControleDeContatos.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -18,6 +20,7 @@ public class Contato {
 
     @ManyToOne
     @JoinColumn(name = "pessoa_id", nullable = false)
+    @JsonBackReference
     private Pessoa pessoa;
 
     public Long getId() {
@@ -53,7 +56,8 @@ public class Contato {
     }
 
 
-    public Contato() {}
+    public Contato() {
+    }
 
 
     public Contato(Long id, TipoDeContato tipoContato, String contato, Pessoa pessoa) {
@@ -63,4 +67,12 @@ public class Contato {
         this.pessoa = pessoa;
     }
 
+    // Método que retorna apenas o resumo da pessoade quem pertence o contato (nome e id)
+    @JsonProperty("Contato_Pertencente_a:")
+    public Object getContato_Pertencente_a() {
+        return new Object() {
+            public Long id = pessoa.getId();
+            public String nome = pessoa.getNome();
+        };
+    }
 }

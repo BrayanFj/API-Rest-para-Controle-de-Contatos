@@ -1,6 +1,9 @@
 package br.com.BrayanFJ.ApiControleDeContatos.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Pessoa {
@@ -14,6 +17,10 @@ public class Pessoa {
     private String cep;
     private String cidade;
     private String uf;
+
+    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Contato> contatos;
 
     //construtor sem parametros
     public Pessoa(){}
