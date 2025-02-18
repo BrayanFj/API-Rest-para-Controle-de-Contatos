@@ -39,11 +39,8 @@ Antes de começar, certifique-se de que atende aos seguintes requisitos:
 ## 📦 Instalação e Execução
 
 1. 🔹 **Clonar o repositório**
- 
-
    git clone https://github.com/BrayanFj/API-Rest-para-Controle-de-Contatos.git
    cd API-Rest-para-Controle-de-Contatos
-
 
 2. 🔹 **Abra o Projeto na IDE:**
    Importe o projeto utilizando sua IDE preferida e configure o uso da JDK 21
@@ -71,9 +68,36 @@ Antes de começar, certifique-se de que atende aos seguintes requisitos:
     - API: [http://localhost:8080](http://localhost:8080)
     - Swagger UI (Documentação): [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
+7. 🔹 **Estrutura do Json utilizada para POST/PUT de pessoas:**
+{
+    "nome": "Brayan Fernandes ",
+    "endereco": "Rua A, 10",
+    "cep": "12345-678",
+    "cidade": "Cidade X",
+    "uf": "SP"
+}
+
+
+8. 🔹 **Estrutura do Json utilizada para POST/PUT de contatos:**
+    {
+    "tipoContato": 0,                            // TELEFONE(0),CELULAR(1),EMAIL(2),LINKEDIN(3),GITHUB(4);                 
+    "contato": "1155555",
+    "pessoa": {
+        "id": 1                                 // id da pessoa que deseja adicionar o contato
+    }
+}
+
 ---
+## 🔗 Endpoints Principais de Contato
+| Método | Endpoint | Descrição |
+|--------|---------|------------|
+| `POST` | `/api/contatos` | Criar um novo contato |
+| `GET` | `/api/contatos` | Listar todos os contatos |
+| `GET` | `/pessoa/{idPessoa}` | Buscar contato por ID |
+| `PUT` | `/{id do contato}` | Atualizar um Contato |
+| `DELETE` | `/{id do contato}` | Deletar um contato |
 
-
+---
 ## 📁 Estrutura do Projeto 
 
 A estrutura de diretórios segue o padrão MVC:
@@ -89,11 +113,11 @@ A estrutura de diretórios segue o padrão MVC:
 
 ### 🛠️ Ajustes e melhorias
 
-O projeto ainda está em desenvolvimento e rebera nvas atualizações 
+O projeto ainda está em desenvolvimento e rebera novas atualizações 
 
 - [x] Tarefa 1 - CRUD para pessoas e contatos (Atividade Avaliativa)
-- [] Tarefa 2 - Integração com Front-end criado/ensinado em aula.
-- [] Tarefa 3 - Novas funcionalidades. 
+- [ ] Tarefa 2 - Integração com Front-end criado/ensinado em aula.
+- [ ] Tarefa 3 - Novas funcionalidades. 
 
 ---
 
@@ -110,12 +134,6 @@ Contribuições são bem-vindas! Caso deseje contribuir:
 - `fix:` para correções de bugs
 - `docs:` para documentação
 - `test:` para inclusão de testes
-
----
-
-## 📝 Licença
-
-Este projeto está sob licença **MIT**. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
 
 ---
 
