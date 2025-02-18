@@ -48,10 +48,10 @@ Antes de começar, certifique-se de que atende aos seguintes requisitos:
 3. 🔹 **Configurar o Banco de Dados**
    Edite o arquivo application.properties ou application.yml para configurar as credenciais do MySQL:
 
-  spring.datasource.url=jdbc:mysql://localhost:3306/seu_banco
-  spring.datasource.username=seu_usuario
-  spring.datasource.password=sua_senha
-  spring.jpa.hibernate.ddl-auto=update
+     spring.datasource.url=jdbc:mysql://localhost:3306/seu_banco
+     spring.datasource.username=seu_usuario
+     spring.datasource.password=sua_senha
+     spring.jpa.hibernate.ddl-auto=update
 
 
 4. 🔹 **Baixe as Dependências:**
@@ -80,12 +80,14 @@ Antes de começar, certifique-se de que atende aos seguintes requisitos:
 
 8. 🔹 **Estrutura do Json utilizada para POST/PUT de contatos:**
     {
-    "tipoContato": 0,                            // TELEFONE(0),CELULAR(1),EMAIL(2),LINKEDIN(3),GITHUB(4);                 
+    "tipoContato": 0,                                           
     "contato": "1155555",
     "pessoa": {
-        "id": 1                                 // id da pessoa que deseja adicionar o contato
+        "id": 1                                 
     }
 }
+// TELEFONE(0),CELULAR(1),EMAIL(2),LINKEDIN(3),GITHUB(4);
+// id da pessoa que deseja adicionar o contato
 
 ---
 ## 🔗 Endpoints Principais de Contato
