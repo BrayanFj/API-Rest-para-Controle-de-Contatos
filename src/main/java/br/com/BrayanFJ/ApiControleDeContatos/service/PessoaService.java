@@ -1,6 +1,7 @@
 package br.com.BrayanFJ.ApiControleDeContatos.service;
 
 import br.com.BrayanFJ.ApiControleDeContatos.model.Pessoa;
+import br.com.BrayanFJ.ApiControleDeContatos.model.PessoaMalaDiretaDTO;
 import br.com.BrayanFJ.ApiControleDeContatos.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +15,12 @@ public class PessoaService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    // Método para salvar uma pessoa
+    // Método para criar uma pessoa
     public Pessoa salvarPessoa(Pessoa pessoa) {
         return pessoaRepository.save(pessoa);
     }
 
-    // Método para buscar todas as pessoas
+    // Método para listar todas as pessoas
     public List<Pessoa> listarPessoas() {
         return pessoaRepository.findAll();
     }
@@ -28,6 +29,14 @@ public class PessoaService {
     public Optional<Pessoa> buscarPessoaPorId(Long id) {
         return pessoaRepository.findById(id);
     }
+
+    //método para busca uma pessoa por mala direta
+    public PessoaMalaDiretaDTO obterMalaDiretaPorId(Long id) {
+        Pessoa pessoa = pessoaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pessoa não encontrada"));
+        return new PessoaMalaDiretaDTO(pessoa);
+    }
+
 
     // Método para excluir uma pessoa
     public void excluirPessoa(Long id) {

@@ -32,18 +32,11 @@ public class PessoaResource {
     }
 
     // Retorna os dados de uma Pessoa por ID para mala direta
+    //@Operation(summary = "Retorna os dados de uma Pessoa por ID para mala direta")
     @GetMapping("/maladireta/{id}")
-        public ResponseEntity<PessoaMalaDiretaDTO> buscarPessoaParaMalaDireta(@PathVariable Long id) {
-        Optional<Pessoa> pessoaOptional = pessoaService.buscarPessoaPorId(id);
-
-        if (pessoaOptional.isPresent()) {
-            Pessoa pessoa = pessoaOptional.get();
-            String malaDireta = pessoa.getEndereco() + ", " + pessoa.getCep() + " - " + pessoa.getCidade() + "/" + pessoa.getUf();
-            PessoaMalaDiretaDTO dto = new PessoaMalaDiretaDTO(pessoa.getId(), pessoa.getNome(), malaDireta);
-            return ResponseEntity.ok(dto);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<PessoaMalaDiretaDTO> obterMalaDireta(@PathVariable Long id) {
+        PessoaMalaDiretaDTO dto = pessoaService.obterMalaDiretaPorId(id);
+        return ResponseEntity.ok(dto);
     }
 
     // Endpoint para listar todas as pessoas
