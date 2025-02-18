@@ -49,26 +49,29 @@ Antes de começar, certifique-se de que atende aos seguintes requisitos:
    Edite o arquivo application.properties ou application.yml para configurar as credenciais do MySQL:
 
      spring.datasource.url=jdbc:mysql://localhost:3306/seu_banco
+   
      spring.datasource.username=seu_usuario
+
      spring.datasource.password=sua_senha
+
      spring.jpa.hibernate.ddl-auto=update
 
 
-4. 🔹 **Baixe as Dependências:**
+5. 🔹 **Baixe as Dependências:**
    ```bash
    mvn clean install
    ```
 
-5. 🔹 **Inicie a Aplicação:**
+6. 🔹 **Inicie a Aplicação:**
    ```bash
    mvn spring-boot:run
    ```
 
-6. 🔹 **Acesse a API:**
+7. 🔹 **Acesse a API:**
     - API: [http://localhost:8080](http://localhost:8080)
     - Swagger UI (Documentação): [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
-7. 🔹 **Estrutura do Json utilizada para POST/PUT de pessoas:**
+8. 🔹 **Estrutura do Json utilizada para POST/PUT de pessoas:**
 {
     "nome": "Brayan Fernandes ",
     "endereco": "Rua A, 10",
@@ -78,7 +81,7 @@ Antes de começar, certifique-se de que atende aos seguintes requisitos:
 }
 
 
-8. 🔹 **Estrutura do Json utilizada para POST/PUT de contatos:**
+9. 🔹 **Estrutura do Json utilizada para POST/PUT de contatos:**
     {
     "tipoContato": 0,                                           
     "contato": "1155555",
@@ -115,7 +118,7 @@ A estrutura de diretórios segue o padrão MVC:
 
 ### 🛠️ Ajustes e melhorias
 
-O projeto ainda está em desenvolvimento e rebera novas atualizações 
+O projeto ainda está em desenvolvimento e recebera novas atualizações 
 
 - [x] Tarefa 1 - CRUD para pessoas e contatos (Atividade Avaliativa)
 - [ ] Tarefa 2 - Integração com Front-end criado/ensinado em aula.
@@ -142,5 +145,5 @@ Contribuições são bem-vindas! Caso deseje contribuir:
 ## 📫 Créditos e Contato
 -- 👨‍💻 **Desenvolvido por:** Brayan Fernandes
 - **LinkedIn:** [Brayan Fernandes ]([https://www.linkedin.com/in/seu-perfil/](https://www.linkedin.com/in/brayanfernandesj/))
-- **Email:** [seu.email@gmail.com](Brayan.fernandesjulio@gmail.com)
+- **Email:** [brayan.fernandesjulio@gmail.com](Brayan.fernandesjulio@gmail.com)
 
