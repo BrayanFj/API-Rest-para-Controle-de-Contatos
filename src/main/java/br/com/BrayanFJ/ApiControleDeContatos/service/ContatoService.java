@@ -2,6 +2,8 @@ package br.com.BrayanFJ.ApiControleDeContatos.service;
 
 import br.com.BrayanFJ.ApiControleDeContatos.model.Contato;
 import br.com.BrayanFJ.ApiControleDeContatos.repository.ContatoRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +27,8 @@ public class ContatoService {
     }
 
     // Método para buscar um contato por ID
-    public Optional<Contato> buscarContatoPorId(Long id) {
-        return contatoRepository.findById(id);
+    public List<Contato> listarContatosPorPessoa(Long idPessoa) {
+        return contatoRepository.findByPessoaId(idPessoa);
     }
 
     // Método para atualizar um contato existente
@@ -38,12 +40,13 @@ public class ContatoService {
         return null;
     }
 
-    // Método para excluir um contato por ID
-    public boolean excluirContato(Long id) {
-        if (contatoRepository.existsById(id)) {
-            contatoRepository.deleteById(id);
-            return true;
+    // Método para excluir um contato existente
+    @Transactional
+    public void deletarContato(Long id) {
+        if (!contatoRepository.existsById(id)) {
+            throw new EntityNotFoundException("Contato com ID " + id + " não encontrado.");
         }
-        return false;
+        contatoRepository.deleteById(id);
     }
+
 }

@@ -3,6 +3,7 @@ package br.com.BrayanFJ.ApiControleDeContatos.resource;
 import br.com.BrayanFJ.ApiControleDeContatos.model.Contato;
 import br.com.BrayanFJ.ApiControleDeContatos.service.ContatoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,10 +30,29 @@ public class ContatoResource {
     }
 
     // Endpoint para buscar um contato por ID (CRUD - GET / este busca por um id especifico )
-    @GetMapping("/{id}")
-    public ResponseEntity<Contato> buscarContatoPorId(@PathVariable Long id) {
-        Optional<Contato> contato = contatoService.buscarContatoPorId(id);
-        return contato.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping("/pessoa/{idPessoa}")
+    public List<Contato> listarContatosPorPessoa(@PathVariable Long idPessoa) {
+        return contatoService.listarContatosPorPessoa(idPessoa);
+    }
+
+
+    // Endpoint para atualizar um contato (CRUD - PUT)
+    @PutMapping("/{id}")
+    public ResponseEntity<Contato> atualizarContato(@PathVariable Long id, @RequestBody Contato contato) {
+        Contato contatoAtualizado = contatoService.atualizarContato(id, contato);
+
+        if (contatoAtualizado != null) {
+            return ResponseEntity.ok(contatoAtualizado);  // Retorna o contato atualizado
+        }
+        return ResponseEntity.notFound().build();  // Retorna 404 caso o contato não existir
+    }
+
+    // Endpoint para excluir um contato (CRUD - PUT)
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        contatoService.deletarContato(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT)
+                .body("Contato com ID " + id + " removido com sucesso.");
     }
 
 
