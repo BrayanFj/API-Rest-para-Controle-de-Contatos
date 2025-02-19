@@ -1,5 +1,6 @@
 package br.com.BrayanFJ.ApiControleDeContatos.resource;
 
+import br.com.BrayanFJ.ApiControleDeContatos.DTO.PessoaMalaDiretaDTO;
 import br.com.BrayanFJ.ApiControleDeContatos.model.Pessoa;
 import br.com.BrayanFJ.ApiControleDeContatos.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-import br.com.BrayanFJ.ApiControleDeContatos.DTO.PessoaMalaDiretaDTO;
+//import br.com.BrayanFJ.ApiControleDeContatos.DTO.PessoaMalaDiretaDTO;
 import org.springframework.http.ResponseEntity;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -52,7 +53,7 @@ public class PessoaResource {
 
 
     @Operation(summary = "Endpoint que retorna os dados de uma Pessoa por ID para mala direta")
-    @GetMapping("/api/pessoas/malaDireta/{id}")
+    @GetMapping("/malaDireta/{id}")
     public ResponseEntity<PessoaMalaDiretaDTO> buscarMalaDireta(@PathVariable Long id) {
         Optional<PessoaMalaDiretaDTO> resultado = pessoaService.buscarIDMaladireta(id);
 
@@ -86,7 +87,11 @@ public class PessoaResource {
         }
 
         Pessoa pessoaEditada = pessoaService.atualizarPessoa(id, pessoa);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(pessoaEditada);
+
+        if (pessoaEditada != null) {
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(pessoaEditada);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);  }
     }
 
 
