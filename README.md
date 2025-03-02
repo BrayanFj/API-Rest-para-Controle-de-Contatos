@@ -15,7 +15,7 @@ Este projeto foi desenvolvido para gerenciar informações de endereço de pesso
 
 ## 🚀 Tecnologias Utilizadas
 
-- - **Angular** (Versão 16)
+- **Angular** (Versão 16)
 - **TypeScript**
 - **HTML5**
 - **CSS3**
@@ -65,10 +65,15 @@ Estrutura do Projeto
 A estrutura de diretórios do projeto é organizada da seguinte forma:
 
 src/app/components/pessoa: Contém os componentes relacionados a pessoas (listagem, formulário, tabela).
+
 src/app/components/contato: Contém os componentes relacionados a contatos (formulário, listagem, tabela).
+
 src/app/interfaces: Contém as interfaces utilizadas no projeto.
+
 src/app/services: Contém os serviços utilizados para comunicação com a API e gerenciamento de dados.
+
 src/app/app.module.ts: Módulo principal da aplicação.
+
 src/app/app-routing.module.ts: Módulo de rotas da aplicaçã
 ---
 
