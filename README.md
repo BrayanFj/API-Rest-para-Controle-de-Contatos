@@ -1,112 +1,295 @@
-# 📌 Projeto Listagem de Pessoas e Contatos
+# 📌 API de Gerenciamento de Contatos
+
+
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge)
+
 ![GitHub language count](https://img.shields.io/github/languages/count/iuricode/README-template?style=for-the-badge)
+
 ![GitHub forks](https://img.shields.io/github/forks/iuricode/README-template?style=for-the-badge)
+
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge)
+
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge)
+
+
 
 ## 📌 Sobre o Projeto
 
-Este projeto foi desenvolvido para gerenciar informações de endereço de pessoas e seu respectivo contato. Este projeto foi criado como parte de um processo de capacitação da Minsait e é ideal para ser integrado a sistemas de gerenciamento de contatos, aplicações web e outras soluções que necessitem de controle de informações de contato.
+
+
+A API de Controle de Contatos foi desenvolvida para gerenciar relações entre pessoas e seus contatos, permitindo operações de CRUD (Create, Read, Update, Delete). Este projeto foi criado como parte de um processo de capacitação da Minsait e é ideal para ser integrado a sistemas de gerenciamento de contatos, aplicações web e outras soluções que necessitem de controle de informações de contato.
+
+
+
+
 
 ---
+
 
 
 ## 🚀 Tecnologias Utilizadas
 
-- **Angular** (Versão 16)
-- **TypeScript**
-- **HTML5**
-- **CSS3**
-- **Angular CLI**
-- **ViaCEP API** para busca de endereços
+
+
+- **Java** (JDK 21)
+
+- **Spring Boot**
+
+- **Maven** para gerenciamento de dependências
+
+- **Banco de Dados**  MySQL
+
+- **Spring Data JPA** para persistência de dados
+
+- **Swagger (SpringDoc OpenAPI)** para documentação da API
+
+- **Spring Boot Starter Validation** para validação de dados
+
 
 
 ---
+
+
 
 ## 💻 Pré-requisitos
 
+
+
 Antes de começar, certifique-se de que atende aos seguintes requisitos:
 
-- **Node.js** (Versão 18 ou superior) e **npm** (ou **Yarn**) instalados.
-- **Angular CLI** instalado globalmente (`npm install -g @angular/cli`).
-- **IDE** recomendada: Visual Studio Code ou outra compatível com Angular.
+
+
+- **JDK 21** instalado e configurado no ambiente.
+
+- **Maven** instalado para baixar dependências e compilar o projeto.
+
+- **IDE** recomendada: IntelliJ IDEA ou outra compatível com Java.
+
+- **MySQL** Instale e configure o banco de dados.
+
+
 
 ---
+
+
 
 ## 📦 Instalação e Execução
 
-1. 🔹 **Clonar o repositório:**
 
-   ```bash
-   git clone [https://github.com/BrayanFj/listagem-pessoas.git](https://www.google.com/search?q=https://github.com/BrayanFj/listagem-pessoas.git)
-   cd listagem-pessoas
 
-2. 🔹 **Instalar as dependências:**
+1. 🔹 **Clonar o repositório**
 
-   Bash:
-   npm install
+   git clone https://github.com/BrayanFj/API-Rest-para-Controle-de-Contatos.git
 
-3. 🔹 **Iniciar o servidor de desenvolvimento:**
+   cd API-Rest-para-Controle-de-Contatos
 
-   Bash:
-   ng serve
 
-5. 🔹 Acessar a aplicação:
 
-   Abra o navegador e acesse http://localhost:4200/
+2. 🔹 **Abra o Projeto na IDE:**
+
+   Importe o projeto utilizando sua IDE preferida e configure o uso da JDK 21
+
+
+
+3. 🔹 **Configurar o Banco de Dados**
+
+   Edite o arquivo application.properties ou application.yml para configurar as credenciais do MySQL:
+
+
+
+     spring.datasource.url=jdbc:mysql://localhost:3306/seu_banco
+
+   
+
+     spring.datasource.username=seu_usuario
+
+
+
+     spring.datasource.password=sua_senha
+
+
+
+     spring.jpa.hibernate.ddl-auto=update
+
+
+
+
+
+5. 🔹 **Baixe as Dependências:**
+
+   ```bash
+
+   mvn clean install
+
+   ```
+
+
+
+6. 🔹 **Inicie a Aplicação:**
+
+   ```bash
+
+   mvn spring-boot:run
+
+   ```
+
+
+
+7. 🔹 **Acesse a API:**
+
+    - API: [http://localhost:8080](http://localhost:8080)
+
+    - Swagger UI (Documentação): [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+
+
+
+8. 🔹 **Estrutura do Json utilizada para POST/PUT de pessoas:**
+
+{
+
+    "nome": "Brayan Fernandes ",
+
+    "endereco": "Rua A, 10",
+
+    "cep": "12345-678",
+
+    "cidade": "Cidade X",
+
+    "uf": "SP"
+
+}
+
+
+
+
+
+9. 🔹 **Estrutura do Json utilizada para POST/PUT de contatos:**
+
+    {
+
+    "tipoContato": 0,                                           
+
+    "contato": "1155555",
+
+    "pessoa": {
+
+        "id": 1                                 
+
+    }
+
+}
+
+// TELEFONE(0),CELULAR(1),EMAIL(2),LINKEDIN(3),GITHUB(4);
+
+// id da pessoa que deseja adicionar o contato
+
 
 
 ---
-## 📁 Estrutura do Projeto 
 
-Estrutura do Projeto
-A estrutura de diretórios do projeto é organizada da seguinte forma:
+## 🔗 Endpoints Principais de Contato
 
-src/app/components/pessoa: Contém os componentes relacionados a pessoas (listagem, formulário, tabela).
+| Método | Endpoint | Descrição |
 
-src/app/components/contato: Contém os componentes relacionados a contatos (formulário, listagem, tabela).
+|--------|---------|------------|
 
-src/app/interfaces: Contém as interfaces utilizadas no projeto.
+| `POST` | `/api/contatos` | Criar um novo contato |
 
-src/app/services: Contém os serviços utilizados para comunicação com a API e gerenciamento de dados.
+| `GET` | `/api/contatos` | Listar todos os contatos |
 
-src/app/app.module.ts: Módulo principal da aplicação.
+| `GET` | `/pessoa/{idPessoa}` | Buscar contato por ID |
 
-src/app/app-routing.module.ts: Módulo de rotas da aplicaçã
+| `PUT` | `/{id do contato}` | Atualizar um Contato |
+
+| `DELETE` | `/{id do contato}` | Deletar um contato |
+
+
+
 ---
+
+## 📁 Estrutura do Projeto 
+
+
+
+A estrutura de diretórios segue o padrão MVC:
+
+
+
+- **models** → Classes que representam as entidades do domínio.
+
+- **controllers** → Recebem requisições HTTP e direcionam para os serviços.
+
+- **services** → Contém a lógica de negócio da aplicação.
+
+- **repositories** → Interfaces para persistência de dados.
+
+- **dtos** → Transferência de dados entre as camadas.
+
+- **exceptions** → Tratamento de exceções personalizadas.
+
+
+
+---
+
+
 
 ### 🛠️ Ajustes e melhorias
 
-O projeto ainda está em desenvolvimento e recebera novas atualizações 
 
-- [x] Tarefa 1 - Criação da aplicação 
-- [ ] Tarefa 2 - Integração com Back-end criado/ensinado em aula.
-- [ ] Tarefa 3 - Novas funcionalidades.
-- [ ] Tarefa 4 - Implementar autenticação e autorização.
-- [ ] Tarefa 4 - Melhorias de UI/UX. 
+
+O projeto ainda está em desenvolvimento e recebera novas atualizações 
+
+
+
+- [x] Tarefa 1 - CRUD para pessoas e contatos (Atividade Avaliativa)
+
+- [ ] Tarefa 2 - Integração com Front-end criado/ensinado em aula.
+
+- [ ] Tarefa 3 - Novas funcionalidades. 
+
+
 
 ---
+
+
 
 ## 🤝 Contribuição
 
+
+
 Contribuições são bem-vindas! Caso deseje contribuir:
 
+
+
 1. **Issues:** Abra uma _issue_ para sugerir melhorias ou reportar bugs.
-2. **Pull Requests:** Envie suas contribuições por meio de _pull requests_.  
-3.  **Observação:** Os commits devem seguir as convenções em inglês, utilizando prefixos como `feat:`, `fix:` e `wip:`.
+
+2. **Pull Requests:** Envie suas contribuições por meio de _pull requests_.  
+
+3.  **Observação:** Os commits devem seguir as convenções em inglês, utilizando prefixos como `feat:`, `fix:` e `wip:`.
+
+
 
 **Os commits devem seguir a convenção:**
+
 - `feat:` para novas funcionalidades
+
 - `fix:` para correções de bugs
+
 - `docs:` para documentação
+
 - `test:` para inclusão de testes
+
+
 
 ---
 
-## 📫 Créditos e Contato
--- 👨‍💻 **Desenvolvido por:** Brayan Fernandes
-- **LinkedIn:** [Brayan Fernandes ]([https://www.linkedin.com/in/seu-perfil/](https://www.linkedin.com/in/brayanfernandesj/))
-- **Email:** [brayan.fernandesjulio@gmail.com](Brayan.fernandesjulio@gmail.com)
 
+
+## 📫 Créditos e Contato
+
+-- 👨‍💻 **Desenvolvido por:** Brayan Fernandes
+
+- **LinkedIn:** [Brayan Fernandes ]([https://www.linkedin.com/in/seu-perfil/](https://www.linkedin.com/in/brayanfernandesj/))
+
+- **Email:** [brayan.fernandesjulio@gmail.com](Brayan.fernandesjulio@gmail.com)
