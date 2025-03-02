@@ -1,4 +1,4 @@
-# 📌 API de Gerenciamento de Contatos
+# 📌 Projeto Listagem de Pessoas e Contatos
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/iuricode/README-template?style=for-the-badge)
@@ -8,20 +8,20 @@
 
 ## 📌 Sobre o Projeto
 
-A API de Controle de Contatos foi desenvolvida para gerenciar relações entre pessoas e seus contatos, permitindo operações de CRUD (Create, Read, Update, Delete). Este projeto foi criado como parte de um processo de capacitação da Minsait e é ideal para ser integrado a sistemas de gerenciamento de contatos, aplicações web e outras soluções que necessitem de controle de informações de contato.
-
+Este projeto foi desenvolvido para gerenciar informações de endereço de pessoas e seu respectivo contato. Este projeto foi criado como parte de um processo de capacitação da Minsait e é ideal para ser integrado a sistemas de gerenciamento de contatos, aplicações web e outras soluções que necessitem de controle de informações de contato.
 
 ---
 
+
 ## 🚀 Tecnologias Utilizadas
 
-- **Java** (JDK 21)
-- **Spring Boot**
-- **Maven** para gerenciamento de dependências
-- **Banco de Dados**  MySQL
-- **Spring Data JPA** para persistência de dados
-- **Swagger (SpringDoc OpenAPI)** para documentação da API
-- **Spring Boot Starter Validation** para validação de dados
+- - **Angular** (Versão 16)
+- **TypeScript**
+- **HTML5**
+- **CSS3**
+- **Angular CLI**
+- **ViaCEP API** para busca de endereços
+
 
 ---
 
@@ -29,100 +29,58 @@ A API de Controle de Contatos foi desenvolvida para gerenciar relações entre p
 
 Antes de começar, certifique-se de que atende aos seguintes requisitos:
 
-- **JDK 21** instalado e configurado no ambiente.
-- **Maven** instalado para baixar dependências e compilar o projeto.
-- **IDE** recomendada: IntelliJ IDEA ou outra compatível com Java.
-- **MySQL** Instale e configure o banco de dados.
+- **Node.js** (Versão 18 ou superior) e **npm** (ou **Yarn**) instalados.
+- **Angular CLI** instalado globalmente (`npm install -g @angular/cli`).
+- **IDE** recomendada: Visual Studio Code ou outra compatível com Angular.
 
 ---
 
 ## 📦 Instalação e Execução
 
-1. 🔹 **Clonar o repositório**
-   git clone https://github.com/BrayanFj/API-Rest-para-Controle-de-Contatos.git
-   cd API-Rest-para-Controle-de-Contatos
+1. 🔹 **Clonar o repositório:**
 
-2. 🔹 **Abra o Projeto na IDE:**
-   Importe o projeto utilizando sua IDE preferida e configure o uso da JDK 21
-
-3. 🔹 **Configurar o Banco de Dados**
-   Edite o arquivo application.properties ou application.yml para configurar as credenciais do MySQL:
-
-     spring.datasource.url=jdbc:mysql://localhost:3306/seu_banco
-   
-     spring.datasource.username=seu_usuario
-
-     spring.datasource.password=sua_senha
-
-     spring.jpa.hibernate.ddl-auto=update
-
-
-5. 🔹 **Baixe as Dependências:**
    ```bash
-   mvn clean install
-   ```
+   git clone [https://github.com/BrayanFj/listagem-pessoas.git](https://www.google.com/search?q=https://github.com/BrayanFj/listagem-pessoas.git)
+   cd listagem-pessoas
 
-6. 🔹 **Inicie a Aplicação:**
-   ```bash
-   mvn spring-boot:run
-   ```
+2. 🔹 **Instalar as dependências:**
 
-7. 🔹 **Acesse a API:**
-    - API: [http://localhost:8080](http://localhost:8080)
-    - Swagger UI (Documentação): [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+   Bash:
+   npm install
 
-8. 🔹 **Estrutura do Json utilizada para POST/PUT de pessoas:**
-{
-    "nome": "Brayan Fernandes ",
-    "endereco": "Rua A, 10",
-    "cep": "12345-678",
-    "cidade": "Cidade X",
-    "uf": "SP"
-}
+3. 🔹 **Iniciar o servidor de desenvolvimento:**
 
+   Bash:
+   ng serve
 
-9. 🔹 **Estrutura do Json utilizada para POST/PUT de contatos:**
-    {
-    "tipoContato": 0,                                           
-    "contato": "1155555",
-    "pessoa": {
-        "id": 1                                 
-    }
-}
-// TELEFONE(0),CELULAR(1),EMAIL(2),LINKEDIN(3),GITHUB(4);
-// id da pessoa que deseja adicionar o contato
+5. 🔹 Acessar a aplicação:
 
----
-## 🔗 Endpoints Principais de Contato
-| Método | Endpoint | Descrição |
-|--------|---------|------------|
-| `POST` | `/api/contatos` | Criar um novo contato |
-| `GET` | `/api/contatos` | Listar todos os contatos |
-| `GET` | `/pessoa/{idPessoa}` | Buscar contato por ID |
-| `PUT` | `/{id do contato}` | Atualizar um Contato |
-| `DELETE` | `/{id do contato}` | Deletar um contato |
+   Abra o navegador e acesse http://localhost:4200/
+
 
 ---
 ## 📁 Estrutura do Projeto 
 
-A estrutura de diretórios segue o padrão MVC:
+Estrutura do Projeto
+A estrutura de diretórios do projeto é organizada da seguinte forma:
 
-- **models** → Classes que representam as entidades do domínio.
-- **controllers** → Recebem requisições HTTP e direcionam para os serviços.
-- **services** → Contém a lógica de negócio da aplicação.
-- **repositories** → Interfaces para persistência de dados.
-- **dtos** → Transferência de dados entre as camadas.
-- **exceptions** → Tratamento de exceções personalizadas.
-
+src/app/components/pessoa: Contém os componentes relacionados a pessoas (listagem, formulário, tabela).
+src/app/components/contato: Contém os componentes relacionados a contatos (formulário, listagem, tabela).
+src/app/interfaces: Contém as interfaces utilizadas no projeto.
+src/app/services: Contém os serviços utilizados para comunicação com a API e gerenciamento de dados.
+src/app/app.module.ts: Módulo principal da aplicação.
+src/app/app-routing.module.ts: Módulo de rotas da aplicaçã
 ---
 
 ### 🛠️ Ajustes e melhorias
 
 O projeto ainda está em desenvolvimento e recebera novas atualizações 
 
-- [x] Tarefa 1 - CRUD para pessoas e contatos (Atividade Avaliativa)
-- [ ] Tarefa 2 - Integração com Front-end criado/ensinado em aula.
-- [ ] Tarefa 3 - Novas funcionalidades. 
+- [x] Tarefa 1 - Criação da aplicação 
+- [ ] Tarefa 2 - Integração com Back-end criado/ensinado em aula.
+- [ ] Tarefa 3 - Novas funcionalidades.
+- [ ] Tarefa 4 - Implementar autenticação e autorização.
+- [ ] Tarefa 4 - Melhorias de UI/UX. 
 
 ---
 
